@@ -8,7 +8,6 @@ public class Utilizador {
     private String nome;
     private String password;
 
-
     public Utilizador(String email, String nome, String password) {
         this.email = email;
         this.nome = nome;
