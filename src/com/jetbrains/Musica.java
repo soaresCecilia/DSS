@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Musica {
-    private static int idMusica;
+    private int idMusica;
     private String nome;
     private String autor;
     private String album;

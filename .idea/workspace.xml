@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a7f3f764-44c6-41ea-97d7-0bc341c55eee" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/jetbrains/Musica.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/jetbrains/MusicaDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/jetbrains/Video.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/jetbrains/Utilizador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jetbrains/Utilizador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/jetbrains/Musica.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jetbrains/Musica.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/jetbrains/MusicaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jetbrains/MusicaDAO.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

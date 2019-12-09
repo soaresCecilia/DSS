@@ -5,7 +5,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
 
-public class MusicaDAO {
+import com.jetbrains.Musica;
+
+
+public class MusicaDAO implements Map<Integer, Musica>{
     private static MusicaDAO inst = null;
     private final List<String> colunas = Arrays.asList("id","nome","autor","album","categoria","caminho");
 
@@ -117,7 +120,7 @@ public class MusicaDAO {
 
 
     //transacoes
-    public Musica put(int key, Musica value) {
+    public Musica put(Integer key, Musica value) {
         try {
             Musica m = null;
             Statement stm = Conexao.getConexao().createStatement();
