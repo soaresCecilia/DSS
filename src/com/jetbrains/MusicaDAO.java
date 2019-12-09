@@ -221,7 +221,7 @@ public class MusicaDAO implements Map<Integer, Musica>{
     }
 
 
-    public Map<Integer, Musica> getAll() {
+    public Map<Integer, Musica> getTodos() {
         Map<Integer, Musica> mapMusicas = new HashMap<>();
         Collection<Musica> colecao = values();
 
@@ -259,6 +259,27 @@ public class MusicaDAO implements Map<Integer, Musica>{
             return colecao;
         }
         catch (Exception e) {throw new NullPointerException(e.getMessage());}
+    }
+
+
+    public int proximoIdMusica() {
+        try {
+            int proxId = 0;
+            Statement stm = Conexao.getConexao().createStatement();
+            String query = "SELECT id FROM Musica ORDER BY id DESC LIMIT 1;";
+            ResultSet rs = stm.executeQuery(query);
+
+            if (rs.next()) {
+                proxId = Integer.valueOf(rs.getString(1));
+            }
+
+            proxId++;
+
+
+            return proxId;
+        } catch (SQLException e) {
+            throw new NullPointerException(e.getMessage());
+        }
     }
 
 }

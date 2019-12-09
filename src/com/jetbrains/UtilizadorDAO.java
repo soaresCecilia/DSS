@@ -211,7 +211,7 @@ public class UtilizadorDAO implements Map<String, Utilizador> {
         }
 
 
-        public Map<String, Utilizador> getAll() {
+        public Map<String, Utilizador> getTodos() {
             Map<String, Utilizador> mapUtilizadores = new HashMap<>();
             Collection<Utilizador> colecao = values();
 

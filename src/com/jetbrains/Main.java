@@ -58,7 +58,7 @@ public class Main {
 
         Utilizador ut = u.update("aluninho", (new Utilizador("aluninho", "Balbina", "ola")));
 
-        Map<String, Utilizador> users = u.getAll();
+        Map<String, Utilizador> users = u.getTodos();
         for(Utilizador l : users.values()) {
             System.out.println(l.getEmail());
         }
