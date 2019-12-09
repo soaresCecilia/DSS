@@ -36,10 +36,6 @@ public class Utilizador {
         return nome;
     }
 
-    public String trataString(){
-        return ("'" + this.nome + "','" + this.email + "','" + this.password +"';");
-    }
-
 
     public List<String> utilizadorToLinha(Utilizador u) {
         List<String> utilizador = new ArrayList<>();
