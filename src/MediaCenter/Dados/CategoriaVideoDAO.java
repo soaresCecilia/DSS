@@ -29,7 +29,7 @@ public class CategoriaVideoDAO implements Map<Integer, Categoria> {
         try {
             int tam = 0;
             Statement stm = Conexao.getConexao().createStatement();
-            ResultSet rs = stm.executeQuery("SELECT id FROM CategoriaVideo");
+            ResultSet rs = stm.executeQuery("SELECT * FROM CategoriaVideo");
             for (tam = 0;rs.next();tam++);
             return tam;
         }

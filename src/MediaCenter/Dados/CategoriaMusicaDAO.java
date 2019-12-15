@@ -34,7 +34,7 @@ public class CategoriaMusicaDAO implements Map<Integer, Categoria> {
         try {
             int tam = 0;
             Statement stm = Conexao.getConexao().createStatement();
-            ResultSet rs = stm.executeQuery("SELECT id FROM CategoriaMusica");
+            ResultSet rs = stm.executeQuery("SELECT * FROM CategoriaMusica");
             for (tam = 0;rs.next();tam++);
             return tam;
         }

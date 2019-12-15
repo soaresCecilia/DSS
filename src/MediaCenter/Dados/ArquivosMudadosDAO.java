@@ -129,25 +129,45 @@ public class ArquivosMudadosDAO implements Map<Key, Arquivo> {
 
 
         try {
+
+            //se o id for de uma musica
             Musica m = null;
+            String novaCategoria = "";
             Statement stm = Conexao.getConexao().createStatement();
             String sqlMusica = "SELECT * FROM Musica WHERE id ='" + id +"'";
             ResultSet rsMusica = stm.executeQuery(sqlMusica);
+            String sqlMusiMudada = "SELECT * FROM ArquivosMudados WHERE id ='" + id + "'and '" + this.colunas.get(1) + "' = email'";
+            ResultSet rsMusiMudada = stm.executeQuery(sqlMusiMudada);
+
+            if (rsMusiMudada.next()) {
+                novaCategoria = rsMusica.getString(3);
+            }
+
             if (rsMusica.next()) {
                 m = new Musica(Integer.valueOf(rsMusica.getString(1)), rsMusica.getString(2), rsMusica.getString(3),
-                        rsMusica.getString(4), rsMusica.getString(5), rsMusica.getString(6));
+                        rsMusica.getString(4), novaCategoria, rsMusica.getString(6));
                 return m;
             }
-            else {
-                Video v = null;
-                Statement st = Conexao.getConexao().createStatement();
-                String sql = "SELECT * FROM Video WHERE id ='"+ id +"'";
-                ResultSet rs = st.executeQuery(sql);
-                if (rs.next())
-                    v = new Video(Integer.valueOf(rs.getString(1)),rs.getString(2),rs.getString(3),
-                            rs.getString(4), rs.getString(5), rs.getString(6));
-                return v;
+
+            //se o id for de um filme
+            Video v = null;
+            String sql = "SELECT * FROM Video WHERE id ='"+ id +"'";
+            ResultSet rs = stm.executeQuery(sql);
+
+            String sqlVideoMudado = "SELECT * FROM ArquivosMudados WHERE id ='" + id + "'and '" + this.colunas.get(1) + "' = email'";
+            ResultSet rsVideoMudado = stm.executeQuery(sqlVideoMudado);
+
+
+            if (rsVideoMudado.next()) {
+                novaCategoria = rsMusica.getString(3);
             }
+
+            if (rs.next())
+                v = new Video(Integer.valueOf(rs.getString(1)),rs.getString(2),rs.getString(3),
+                            rs.getString(4), novaCategoria, rs.getString(6));
+
+            return v;
+
         }
         catch (Exception e) {
             throw new NullPointerException(e.getMessage());

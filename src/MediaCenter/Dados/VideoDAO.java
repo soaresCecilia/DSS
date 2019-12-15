@@ -198,7 +198,7 @@ public class VideoDAO implements ArquivoDAO {
         try {
             int tam = 0;
             Statement stm = Conexao.getConexao().createStatement();
-            ResultSet rs = stm.executeQuery("SELECT id FROM Video");
+            ResultSet rs = stm.executeQuery("SELECT * FROM Video");
             for (tam = 0;rs.next();tam++);
             return tam;
         }

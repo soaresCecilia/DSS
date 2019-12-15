@@ -3,12 +3,17 @@
   <component name="ChangeListManager">
     <list default="true" id="a7f3f764-44c6-41ea-97d7-0bc341c55eee" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MediaCenter/Dados/AdministradorDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MediaCenter/Dados/AdministradorDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MediaCenter/Dados/ArquivosMudadosDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MediaCenter/Dados/ArquivosMudadosDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MediaCenter/Dados/CategoriaMusicaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MediaCenter/Dados/CategoriaMusicaDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MediaCenter/Dados/CategoriaVideoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MediaCenter/Dados/CategoriaVideoDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MediaCenter/Dados/MusicaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MediaCenter/Dados/MusicaDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MediaCenter/Dados/PlaylistsUserMusicaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MediaCenter/Dados/PlaylistsUserMusicaDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MediaCenter/Dados/PlaylistsUserVideoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MediaCenter/Dados/PlaylistsUserVideoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MediaCenter/Dados/UtilizadorDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MediaCenter/Dados/UtilizadorDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MediaCenter/Dados/VideoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MediaCenter/Dados/VideoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MediaCenter/LogicaDeNegocio/Funcionalidades/Categoria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MediaCenter/LogicaDeNegocio/Funcionalidades/Categoria.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MediaCenter/LogicaDeNegocio/Funcionalidades/Musica.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MediaCenter/LogicaDeNegocio/Funcionalidades/Musica.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MediaCenter/LogicaDeNegocio/Funcionalidades/Playlists.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MediaCenter/LogicaDeNegocio/Funcionalidades/Playlists.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

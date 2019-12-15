@@ -22,15 +22,7 @@ public class Musica implements Arquivo {
         this.caminho = caminho;
     }
 
-/*
-    public Musica(List<String> stringsRs) {
-        this.idMusica = Integer.valueOf(stringsRs.get(0));
-        this.nome = stringsRs.get(1);
-        this.autor = stringsRs.get(2);
-        this.album = stringsRs.get(3);
-        this.categoria = Integer.valueOf(stringsRs.get(4));
-    }
-*/
+
     public String getCategoria() {
         return this.categoria;
     }

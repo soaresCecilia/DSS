@@ -247,7 +247,7 @@ public class AdministradorDAO implements Map<String, Administrador> {
         try {
             int tam = 0;
             Statement stm = Conexao.getConexao().createStatement();
-            ResultSet rs = stm.executeQuery("SELECT email FROM Administrador");
+            ResultSet rs = stm.executeQuery("SELECT * FROM Administrador");
             for (tam = 0;rs.next();tam++);
             return tam;
         }
