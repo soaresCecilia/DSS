@@ -169,40 +169,7 @@ public class MusicaDAO implements ArquivoDAO{
 
     }
 
-    //transacoes
-    public Musica update(Integer key, Object value){
-        try {
 
-            if (!(value instanceof Musica))
-                return null;
-
-            Musica m = (Musica) value;
-            List<Object> linha = m.arquivoToLinha(m);
-
-
-            Statement stm = Conexao.getConexao().createStatement();
-            StringBuilder query = new StringBuilder("UPDATE Musica SET ");
-
-            //até à penultima coluna
-            for(int i = 0; i < (this.colunas.size()-1) ; i++){
-                query.append(this.colunas.get(i) + " = '" + linha.get(i) + "' , ");
-            }
-
-
-            query.append(this.colunas.get(this.colunas.size()-1) + " = '" +
-                    linha.get(this.colunas.size()-1) + "' WHERE " +
-                    this.colunas.get(0) + " = '" + key + "';");
-
-
-            stm.executeUpdate(query.toString());
-
-            return m;
-        }
-        catch (SQLException e) {
-            throw new NullPointerException(e.getMessage());
-        }
-
-    }
 
     public Musica remove(Object key) {
         try {
@@ -285,6 +252,42 @@ public class MusicaDAO implements ArquivoDAO{
         colecao.forEach(m -> mapMusicas.put(m.chave(), (Musica)m));
 
         return mapMusicas;
+    }
+
+
+    //transacoes
+    public Musica update(Integer key, Object value){
+        try {
+
+            if (!(value instanceof Musica))
+                return null;
+
+            Musica m = (Musica) value;
+            List<Object> linha = m.arquivoToLinha(m);
+
+
+            Statement stm = Conexao.getConexao().createStatement();
+            StringBuilder query = new StringBuilder("UPDATE Musica SET ");
+
+            //até à penultima coluna
+            for(int i = 0; i < (this.colunas.size()-1) ; i++){
+                query.append(this.colunas.get(i) + " = '" + linha.get(i) + "' , ");
+            }
+
+
+            query.append(this.colunas.get(this.colunas.size()-1) + " = '" +
+                    linha.get(this.colunas.size()-1) + "' WHERE " +
+                    this.colunas.get(0) + " = '" + key + "';");
+
+
+            stm.executeUpdate(query.toString());
+
+            return m;
+        }
+        catch (SQLException e) {
+            throw new NullPointerException(e.getMessage());
+        }
+
     }
 
 }

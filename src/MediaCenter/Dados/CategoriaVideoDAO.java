@@ -2,11 +2,10 @@ package MediaCenter.Dados;
 
 import MediaCenter.LogicaDeNegocio.Funcionalidades.Categoria;
 
-import java.util.Collection;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class CategoriaVideoDAO implements Map<String, Categoria> {
+
 
     public int size() {
         return 0;

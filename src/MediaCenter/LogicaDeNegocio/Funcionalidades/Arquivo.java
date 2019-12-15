@@ -1,5 +1,7 @@
 package MediaCenter.LogicaDeNegocio.Funcionalidades;
 
+import java.util.List;
+
 public interface Arquivo {
 
     public String getNome();
@@ -15,6 +17,8 @@ public interface Arquivo {
     public String getAlbum_Temporada();
 
     public String getCategoria();
+
+    public List<Object> arquivoToLinha(Arquivo arq);
 
     public int chave();
 }
