@@ -128,7 +128,7 @@ public class MusicaDAO implements ArquivoDAO{
             stm.executeUpdate("DELETE FROM Musica WHERE id='"+key+"'");
             String query = "INSERT INTO Musica(id, nome, autor, album, categoria, caminho;) " +
                          "VALUES ('" + value.getID() + "','" + key + "','" + value.getNome() +
-                         "','" + value.getAutor() + "','" + value.getAlbum_Temporada() + value.getCategoria() +
+                         "','" + value.getAutor() + "','" + value.getAlbum_Temporada() + "','" + value.getCategoria() +
                          "','" + value.getCaminho() + "')";
             stm.executeUpdate(query);
             return new Musica(value.getID(), value.getNome(),value.getAutor(),

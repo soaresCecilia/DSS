@@ -105,14 +105,14 @@ public class VideoDAO implements ArquivoDAO {
 
     public Video get(Object key) {
         try {
-            Video m = null;
+            Video v = null;
             Statement stm = Conexao.getConexao().createStatement();
-            String sql = "SELECT * FROM Video WHERE id='"+(Integer)key+"'";
+            String sql = "SELECT * FROM Video WHERE id = '"+(Integer)key+"'";
             ResultSet rs = stm.executeQuery(sql);
             if (rs.next())
-                m = new Video(Integer.valueOf(rs.getString(1)),rs.getString(2),rs.getString(3),
+                v = new Video(Integer.valueOf(rs.getString(1)),rs.getString(2),rs.getString(3),
                         rs.getString(4), rs.getString(5), rs.getString(6));
-            return m;
+            return v;
         }
         catch (Exception e) {throw new NullPointerException(e.getMessage());}
     }
