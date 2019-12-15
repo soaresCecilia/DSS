@@ -11,7 +11,7 @@ import java.util.Set;
 public class Main {
 
     public static void main(String[] args) {
-        Conexao.iniciarConexao("com.mysql.cj.jdbc.Driver", "jdbc:mysql://localhost:3306/caderneta", "root", "traba1h0");
+        Conexao.iniciarConexao("com.mysql.cj.jdbc.Driver", "jdbc:mysql://localhost:3306/caderneta", "root", "pass");
 
         Utilizador user = new Utilizador("aluno", "cecilia", "tttt");
 

@@ -8,6 +8,31 @@ public class Categoria {
 
     private String categoriaArquivo;
     private ArquivoDAO arquivos;
+    private String email;
+
+
+    public String getEmail() {
+        return email;
+    }
+
+    public Categoria(String categoriaArquivo, String email) {
+        this.categoriaArquivo = categoriaArquivo;
+        this.email = email;
+    }
+
+
+    public String getCategoriaArquivo() {
+        return this.categoriaArquivo;
+    }
+
+    public List<Object>  categoriaToLinha(Categoria arq) {
+        List<Object> categoria = new ArrayList<>();
+
+            categoria.add(arq.getCategoriaArquivo());
+            categoria.add(arq.getEmail());
+
+        return categoria;
+    }
 
     /**
      * @param emailUserUpl

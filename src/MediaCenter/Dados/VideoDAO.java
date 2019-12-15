@@ -24,6 +24,7 @@ public class VideoDAO implements ArquivoDAO {
         return inst;
     }
 
+    @Override
     public void clear () {
         try {
             Statement stm = Conexao.getConexao().createStatement();
@@ -32,6 +33,7 @@ public class VideoDAO implements ArquivoDAO {
         catch (Exception e) {throw new NullPointerException(e.getMessage());}
     }
 
+    @Override
     public boolean containsKey(Object key) throws NullPointerException {
         try {
             Statement stm = Conexao.getConexao().createStatement();
@@ -42,6 +44,7 @@ public class VideoDAO implements ArquivoDAO {
         catch (Exception e) {throw new NullPointerException(e.getMessage());}
     }
 
+    @Override
     public boolean containsValue(Object value) {
         if(!(value instanceof Video))
             return false;
@@ -71,6 +74,7 @@ public class VideoDAO implements ArquivoDAO {
         }
     }
 
+    @Override
     public Set<Map.Entry<Integer, Arquivo>> entrySet() {
 
         try {
@@ -99,10 +103,8 @@ public class VideoDAO implements ArquivoDAO {
         catch (SQLException e) {throw new NullPointerException(e.getMessage());}
     }
 
-    public boolean equals(Object o) {
-        return o.getClass().equals( this.getClass());
-    }
 
+    @Override
     public Video get(Object key) {
         try {
             Video v = null;
@@ -120,6 +122,7 @@ public class VideoDAO implements ArquivoDAO {
 
 
     //transacoes
+    @Override
     public Arquivo put(Integer key, Arquivo value) {
         try {
             Video v = null;
@@ -137,22 +140,17 @@ public class VideoDAO implements ArquivoDAO {
     }
 
 
-
-
-
-    public int hashCode() {
-        return this.inst.hashCode();
-    }
-
+    @Override
     public boolean isEmpty() {
         try {
             Statement stm = Conexao.getConexao().createStatement();
-            ResultSet rs = stm.executeQuery("SELECT nome FROM Video");
+            ResultSet rs = stm.executeQuery("SELECT id FROM Video");
             return !rs.next();
         }
         catch (Exception e) {throw new NullPointerException(e.getMessage());}
     }
 
+    @Override
     public Set<Integer> keySet() {
         try {
             Statement stm = Conexao.getConexao().createStatement();
@@ -169,6 +167,95 @@ public class VideoDAO implements ArquivoDAO {
         }
 
     }
+
+
+    @Override
+    public Video remove(Object key) {
+        try {
+            Video v = this.get(key);
+            Statement stm = Conexao.getConexao().createStatement();
+            String query = "DELETE FROM Video where " + this.colunas.get(0) +  " = '" + key + "' ;";
+            stm.executeUpdate(query);
+            return v;
+        }
+        catch (Exception e) {throw new NullPointerException(e.getMessage());}
+    }
+
+    @Override
+    public void putAll(Map<? extends Integer, ? extends Arquivo> video) {
+        if(video.values().equals("Video")) {
+
+            for (Arquivo v : video.values()) {
+                this.put(v.chave(), v);
+            }
+        }
+    }
+
+
+
+    @Override
+    public int size() {
+        try {
+            int tam = 0;
+            Statement stm = Conexao.getConexao().createStatement();
+            ResultSet rs = stm.executeQuery("SELECT id FROM Video");
+            for (tam = 0;rs.next();tam++);
+            return tam;
+        }
+        catch (Exception e) {throw new NullPointerException(e.getMessage());}
+    }
+
+
+
+
+    @Override
+    //transacoes
+    public Collection<Arquivo> values() {
+        try {
+            Collection colecao = new HashSet<Video>();
+            Statement stm = Conexao.getConexao().createStatement();
+            ResultSet rs = stm.executeQuery("SELECT * FROM Video");
+            while (rs.next()) {
+                colecao.add(new Video(Integer.valueOf(rs.getString(1)),rs.getString(2),rs.getString(3),
+                        rs.getString(4),rs.getString(5),rs.getString(6)));
+            }
+            return colecao;
+        }
+        catch (Exception e) {throw new NullPointerException(e.getMessage());}
+    }
+
+
+    public int proximoId() {
+        try {
+            int proxId = 0;
+            Statement stm = Conexao.getConexao().createStatement();
+            String query = "SELECT id FROM Video ORDER BY id DESC LIMIT 1;";
+            ResultSet rs = stm.executeQuery(query);
+
+            if (rs.next()) {
+                proxId = Integer.valueOf(rs.getString(1));
+            }
+
+            proxId++;
+
+
+            return proxId;
+        } catch (SQLException e) {
+            throw new NullPointerException(e.getMessage());
+        }
+    }
+
+
+    public Map<Integer, Video> getTodos() {
+        Map<Integer, Video> mapVideos = new HashMap<>();
+        Collection<Arquivo> colecao = values();
+
+
+        colecao.forEach(v -> mapVideos.put(v.chave(), (Video) v));
+
+        return mapVideos;
+    }
+
 
     //transacoes
     public Video update(Integer key, Object value){
@@ -205,86 +292,8 @@ public class VideoDAO implements ArquivoDAO {
 
     }
 
-    public Video remove(Object key) {
-        try {
-            Video v = this.get(key);
-            Statement stm = Conexao.getConexao().createStatement();
-            String query = "DELETE FROM Video where " + this.colunas.get(0) +  " = '" + key + "' ;";
-            stm.executeUpdate(query);
-            return v;
-        }
-        catch (Exception e) {throw new NullPointerException(e.getMessage());}
-    }
-
-    public void putAll(Map<? extends Integer, ? extends Arquivo> video) {
-        if(video.values().equals("Video")) {
-
-            for (Arquivo v : video.values()) {
-                this.put(v.chave(), v);
-            }
-        }
-    }
-
-    public Map<Integer, Video> getTodos() {
-        Map<Integer, Video> mapVideos = new HashMap<>();
-        Collection<Arquivo> colecao = values();
-
-
-        colecao.forEach(v -> mapVideos.put(v.chave(), (Video) v));
-
-        return mapVideos;
-    }
-
-
-
-    public int size() {
-        try {
-            int tam = 0;
-            Statement stm = Conexao.getConexao().createStatement();
-            ResultSet rs = stm.executeQuery("SELECT id FROM Video");
-            for (tam = 0;rs.next();tam++);
-            return tam;
-        }
-        catch (Exception e) {throw new NullPointerException(e.getMessage());}
-    }
-
-
-
-
-    //transacoes
-    public Collection<Arquivo> values() {
-        try {
-            Collection colecao = new HashSet<Video>();
-            Statement stm = Conexao.getConexao().createStatement();
-            ResultSet rs = stm.executeQuery("SELECT * FROM Video");
-            while (rs.next()) {
-                colecao.add(new Video(Integer.valueOf(rs.getString(1)),rs.getString(2),rs.getString(3),
-                        rs.getString(4),rs.getString(5),rs.getString(6)));
-            }
-            return colecao;
-        }
-        catch (Exception e) {throw new NullPointerException(e.getMessage());}
-    }
-
-
-    public int proximoId() {
-        try {
-            int proxId = 0;
-            Statement stm = Conexao.getConexao().createStatement();
-            String query = "SELECT id FROM Video ORDER BY id DESC LIMIT 1;";
-            ResultSet rs = stm.executeQuery(query);
-
-            if (rs.next()) {
-                proxId = Integer.valueOf(rs.getString(1));
-            }
-
-            proxId++;
-
-
-            return proxId;
-        } catch (SQLException e) {
-            throw new NullPointerException(e.getMessage());
-        }
+    public boolean equals(Object o) {
+        return o.getClass().equals( this.getClass());
     }
 
 }

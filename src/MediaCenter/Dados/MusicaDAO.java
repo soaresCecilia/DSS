@@ -100,9 +100,6 @@ public class MusicaDAO implements ArquivoDAO{
         catch (SQLException e) {throw new NullPointerException(e.getMessage());}
     }
 
-    public boolean equals(Object o) {
-        return o.getClass().equals( this.getClass());
-    }
 
     public Musica get(Object key) {
         try {
@@ -139,9 +136,6 @@ public class MusicaDAO implements ArquivoDAO{
 
 
 
-    public int hashCode() {
-        return this.inst.hashCode();
-    }
 
     public boolean isEmpty() {
         try {
@@ -155,7 +149,7 @@ public class MusicaDAO implements ArquivoDAO{
     public Set<Integer> keySet() {
         try {
             Statement stm = Conexao.getConexao().createStatement();
-            ResultSet rs = stm.executeQuery("SELECT " + this.colunas.get(1) + " FROM Musica;");
+            ResultSet rs = stm.executeQuery("SELECT " + this.colunas.get(0) + " FROM Musica;");
 
             Set<Integer> setChaves = new HashSet<>();
             while (rs.next()) {
@@ -288,6 +282,13 @@ public class MusicaDAO implements ArquivoDAO{
             throw new NullPointerException(e.getMessage());
         }
 
+    }
+
+    public boolean equals(Object o) {
+        return o.getClass().equals( this.getClass());
+    }
+    public int hashCode() {
+        return this.inst.hashCode();
     }
 
 }

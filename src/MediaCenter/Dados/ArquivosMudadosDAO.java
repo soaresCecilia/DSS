@@ -9,16 +9,7 @@ import java.sql.Statement;
 import java.util.*;
 
 
-/*
 
-Tu dentro do DAO de arquivos mudados metes que esse DAO implementa Map<Intwger, Arquivo>, tu vais ter uma
-tabela com arquivos e outra tabela com arquivos mudados (esta tabela de arquivos mudados tem e-mail, id arquivo e
-nova categoria). Dentro do DÃO de arquivos mudados vais ter de ir ver primeiro à tabela de arquivos mudados buscar o id
-do arquivo e depois vais busca-lo à tabela dos arquivos (nesta tabela está o arquivo com a categoria default),
-depois pegas neste arquivo e mudas-lhe a categoria para a nova
-
-
- */
 
 class Key {
     private Integer id;
@@ -90,7 +81,7 @@ public class ArquivosMudadosDAO implements Map<Key, Arquivo> {
     public boolean isEmpty() {
         try {
             Statement stm = Conexao.getConexao().createStatement();
-            ResultSet rs = stm.executeQuery("SELECT nome FROM ArquivosMudados");
+            ResultSet rs = stm.executeQuery("SELECT id FROM ArquivosMudados");
             return !rs.next();
         }
         catch (Exception e) {throw new NullPointerException(e.getMessage());}
