@@ -2,9 +2,32 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a7f3f764-44c6-41ea-97d7-0bc341c55eee" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/jetbrains/Administrador.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MediaCenter/Dados/ArquivoDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MediaCenter/Dados/ArquivosMudadosDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MediaCenter/Dados/CategoriaMusicaDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MediaCenter/Dados/CategoriaVideoDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MediaCenter/Dados/PlaylistsUserMusicaDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MediaCenter/Dados/PlaylistsUserVideoDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MediaCenter/Dados/VideoDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MediaCenter/LogicaDeNegocio/Funcionalidades/Arquivo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MediaCenter/LogicaDeNegocio/Funcionalidades/Categoria.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MediaCenter/LogicaDeNegocio/Funcionalidades/Media.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MediaCenter/LogicaDeNegocio/Funcionalidades/Playlists.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MediaCenter/LogicaDeNegocio/Funcionalidades/Video.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MediaCenter/LogicaDeNegocio/Usuarios/Administrador.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MediaCenter/LogicaDeNegocio/Usuarios/RecursosHumanos.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MediaCenter/MediaCenter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/jetbrains/Utilizador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jetbrains/Utilizador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/jetbrains/Administrador.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/jetbrains/AdministradorDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MediaCenter/Dados/AdministradorDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/jetbrains/Conexao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MediaCenter/Dados/Conexao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/jetbrains/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MediaCenter/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/jetbrains/Musica.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MediaCenter/LogicaDeNegocio/Funcionalidades/Musica.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/jetbrains/MusicaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MediaCenter/Dados/MusicaDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/jetbrains/Utilizador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MediaCenter/LogicaDeNegocio/Usuarios/Utilizador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/jetbrains/UtilizadorDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MediaCenter/Dados/UtilizadorDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/jetbrains/Video.java" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,9 +48,15 @@
   <component name="ProjectId" id="1UTcj2GouPaIyDul333eGXzHhHu" />
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/com/jetbrains/Dados" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -43,9 +72,8 @@
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="com.jetbrains.Main" />
+      <option name="MAIN_CLASS_NAME" value="MediaCenter.Main" />
       <module name="DSS" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
       <method v="2">
@@ -76,7 +104,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
@@ -86,17 +116,17 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/jetbrains/Main.java</url>
-          <line>56</line>
+          <url>file://$PROJECT_DIR$/src/MediaCenter/Main.java</url>
+          <line>57</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/jetbrains/Main.java</url>
-          <line>58</line>
+          <url>file://$PROJECT_DIR$/src/MediaCenter/Main.java</url>
+          <line>59</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/jetbrains/UtilizadorDAO.java</url>
+          <url>file://$PROJECT_DIR$/src/MediaCenter/Dados/UtilizadorDAO.java</url>
           <line>164</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>

@@ -1,8 +1,9 @@
-package com.jetbrains;
+package MediaCenter;
 
-import com.jetbrains.*;
+import MediaCenter.Dados.UtilizadorDAO;
+import MediaCenter.LogicaDeNegocio.Usuarios.Utilizador;
+import MediaCenter.Dados.Conexao;
 
-import java.sql.Connection;
 import java.util.Map;
 import java.util.Set;
 
@@ -10,7 +11,7 @@ import java.util.Set;
 public class Main {
 
     public static void main(String[] args) {
-        Conexao.iniciarConexao("com.mysql.cj.jdbc.Driver", "jdbc:mysql://localhost:3306/caderneta", "root", "por password do workbench");
+        Conexao.iniciarConexao("com.mysql.cj.jdbc.Driver", "jdbc:mysql://localhost:3306/caderneta", "root", "traba1h0");
 
         Utilizador user = new Utilizador("aluno", "cecilia", "tttt");
 

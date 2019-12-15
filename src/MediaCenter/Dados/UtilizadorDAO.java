@@ -1,9 +1,10 @@
-package com.jetbrains;
+package MediaCenter.Dados;
 
 //import business.*;
 import java.util.*;
 import java.sql.*;
-import com.jetbrains.Utilizador;
+
+import MediaCenter.LogicaDeNegocio.Usuarios.Utilizador;
 
 public class UtilizadorDAO implements Map<String, Utilizador> {
     private static UtilizadorDAO inst = null;

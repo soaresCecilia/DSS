@@ -1,11 +1,12 @@
-package com.jetbrains;
+package MediaCenter.Dados;
 
+import MediaCenter.LogicaDeNegocio.Usuarios.Administrador;
+
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
-
-import com.jetbrains.Administrador;
 
 public class AdministradorDAO implements Map<String, Administrador> {
     private static AdministradorDAO inst = null;
@@ -45,7 +46,7 @@ public class AdministradorDAO implements Map<String, Administrador> {
             return false;
 
         try {
-            List<String> administradorLinha = ((Administrador) value).utilizadorToLinha((Administrador)value);
+            List<String> administradorLinha = ((Administrador) value).administardorToLinha((Administrador)value);
 
             Statement stm = Conexao.getConexao().createStatement();
             StringBuilder query = new StringBuilder("SELECT * FROM Administrador WHERE ");
@@ -103,7 +104,7 @@ public class AdministradorDAO implements Map<String, Administrador> {
         try {
             Administrador admin = null;
             Statement stm = Conexao.getConexao().createStatement();
-            String query = "SELECT * FROM Administrador WHERE email='"+(String)key+"'";
+            String query = "SELECT * FROM Administrador WHERE email ='"+(String)key+"'";
             ResultSet rs = stm.executeQuery(query);
             if (rs.next())
                 admin = new Administrador(rs.getString(1),rs.getString(2),rs.getString(3));
@@ -160,17 +161,23 @@ public class AdministradorDAO implements Map<String, Administrador> {
     }
 
     //transacoes
-    public Administrador update(String key, Object value){
-        try {
+    public Administrador update(String key, Object value) throws SQLException {
 
             if (!(value instanceof Administrador))
                 return null;
 
             Administrador admin = (Administrador) value;
-            List<String> linha = admin.utilizadorToLinha(admin);
+            List<String> linha = admin.administardorToLinha(admin);
 
 
-            Statement stm = Conexao.getConexao().createStatement();
+            Connection con = Conexao.getConexao();
+
+            try {
+            //Once the auto-commit mode is set to false , you can commit or rollback the transaction.
+            con.setAutoCommit(false);
+
+            Statement stm = con.createStatement();
+
             StringBuilder query = new StringBuilder("UPDATE Administrador SET ");
 
             //até à penultima coluna
@@ -186,23 +193,36 @@ public class AdministradorDAO implements Map<String, Administrador> {
 
             stm.executeUpdate(query.toString());
 
+            con.commit();
+
             return admin;
         }
         catch (SQLException e) {
+                //Se correr mal faz rollback
+            con.rollback();
             throw new NullPointerException(e.getMessage());
         }
 
     }
 
     public Administrador remove(Object key) {
-        try {
+
             Administrador admin = this.get(key);
-            Statement stm = Conexao.getConexao().createStatement();
+            Connection con = Conexao.getConexao();
+        try {
+            con.setAutoCommit(false);
+            Statement stm = con.createStatement();
             String query = "DELETE FROM Administrador where " + this.colunas.get(0) +  " = '" + key + "' ;";
             stm.executeUpdate(query);
-            return query;
+            return admin;
         }
-        catch (Exception e) {throw new NullPointerException(e.getMessage());}
+        catch (Exception e) {
+            try {
+                con.rollback();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            throw new NullPointerException(e.getMessage());}
     }
 
     public void putAll(Map<? extends String, ? extends Administrador> admins) {

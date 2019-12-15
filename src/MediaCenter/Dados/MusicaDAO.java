@@ -1,14 +1,15 @@
-package com.jetbrains;
+package MediaCenter.Dados;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
 
-import com.jetbrains.Musica;
+import MediaCenter.LogicaDeNegocio.Funcionalidades.Arquivo;
+import MediaCenter.LogicaDeNegocio.Funcionalidades.Musica;
 
 
-public class MusicaDAO implements Map<Integer, Musica>{
+public class MusicaDAO implements ArquivoDAO{
     private static MusicaDAO inst = null;
     private final List<String> colunas = Arrays.asList("id","nome","autor","album","categoria","caminho");
 
@@ -47,7 +48,7 @@ public class MusicaDAO implements Map<Integer, Musica>{
             return false;
 
         try {
-            List<Object> musicaLinha = ((Musica) value).musicaToLinha((Musica)value);
+            List<Object> musicaLinha = ((Musica) value).arquivoToLinha((Musica)value);
 
             Statement stm = Conexao.getConexao().createStatement();
             StringBuilder query = new StringBuilder("SELECT * FROM Musica WHERE ");
@@ -71,10 +72,10 @@ public class MusicaDAO implements Map<Integer, Musica>{
         }
     }
 
-    public Set<Map.Entry<Integer,Musica>> entrySet() {
+    public Set<Map.Entry<Integer, Arquivo>> entrySet() {
 
         try {
-            Set<Map.Entry<Integer, Musica>> setMusica = new HashSet<>();
+            Set<Map.Entry<Integer, Arquivo>> setMusica = new HashSet<>();
             Statement stm = Conexao.getConexao().createStatement();
             ResultSet rs = stm.executeQuery("SELECT * FROM Musica;");
 
@@ -89,7 +90,7 @@ public class MusicaDAO implements Map<Integer, Musica>{
 
 
                 Musica m = new Musica(Integer.valueOf(linha.get(0)), linha.get(1), linha.get(2),
-                                        linha.get(3), Integer.valueOf(linha.get(4)), linha.get(5));
+                                        linha.get(3), linha.get(4), linha.get(5));
 
                 setMusica.add(new AbstractMap.SimpleEntry(m.chave(),m));
             }
@@ -111,7 +112,7 @@ public class MusicaDAO implements Map<Integer, Musica>{
             ResultSet rs = stm.executeQuery(sql);
             if (rs.next())
                 m = new Musica(Integer.valueOf(rs.getString(1)),rs.getString(2),rs.getString(3),
-                        rs.getString(4), Integer.valueOf(rs.getString(5)), rs.getString(6));
+                        rs.getString(4), rs.getString(5), rs.getString(6));
             return m;
         }
         catch (Exception e) {throw new NullPointerException(e.getMessage());}
@@ -120,18 +121,18 @@ public class MusicaDAO implements Map<Integer, Musica>{
 
 
     //transacoes
-    public Musica put(Integer key, Musica value) {
+    public Arquivo put(Integer key, Arquivo value) {
         try {
             Musica m = null;
             Statement stm = Conexao.getConexao().createStatement();
             stm.executeUpdate("DELETE FROM Musica WHERE id='"+key+"'");
             String query = "INSERT INTO Musica(id, nome, autor, album, categoria, caminho;) " +
-                         "VALUES ('" + value.getIdMusica() + "','" + key + "','" + value.getNome() +
-                         "','" + value.getAutor() + "','" + value.getAlbum() + value.getCategoria() +
+                         "VALUES ('" + value.getID() + "','" + key + "','" + value.getNome() +
+                         "','" + value.getAutor() + "','" + value.getAlbum_Temporada() + value.getCategoria() +
                          "','" + value.getCaminho() + "')";
             stm.executeUpdate(query);
-            return new Musica(value.getIdMusica(), value.getNome(),value.getAutor(),
-                                value.getAlbum(), value.getCategoria(), value.getCaminho());
+            return new Musica(value.getID(), value.getNome(),value.getAutor(),
+                                value.getAlbum_Temporada(), value.getCategoria(), value.getCaminho());
         }
         catch (Exception e) {throw new NullPointerException(e.getMessage());}
     }
@@ -176,7 +177,7 @@ public class MusicaDAO implements Map<Integer, Musica>{
                 return null;
 
             Musica m = (Musica) value;
-            List<Object> linha = m.musicaToLinha(m);
+            List<Object> linha = m.arquivoToLinha(m);
 
 
             Statement stm = Conexao.getConexao().createStatement();
@@ -207,29 +208,23 @@ public class MusicaDAO implements Map<Integer, Musica>{
         try {
             Musica m = this.get(key);
             Statement stm = Conexao.getConexao().createStatement();
-            String query = "DELETE FROM Muscia where " + this.colunas.get(0) +  " = '" + key + "' ;";
+            String query = "DELETE FROM Musica where " + this.colunas.get(0) +  " = '" + key + "' ;";
             stm.executeUpdate(query);
             return m;
         }
         catch (Exception e) {throw new NullPointerException(e.getMessage());}
     }
 
-    public void putAll(Map<? extends Integer, ? extends Musica> musica) {
-        for (Musica m : musica.values()) {
-            this.put(m.chave(), m);
+
+
+    public void putAll(Map<? extends Integer, ? extends Arquivo> musica) {
+        if(musica.values().equals("Musica")) {
+
+            for (Arquivo m : musica.values()) {
+                this.put(m.chave(), m);
+            }
         }
     }
-
-
-    public Map<Integer, Musica> getTodos() {
-        Map<Integer, Musica> mapMusicas = new HashMap<>();
-        Collection<Musica> colecao = values();
-
-        colecao.forEach(m -> mapMusicas.put(m.chave(), m));
-
-        return mapMusicas;
-    }
-
 
 
     public int size() {
@@ -247,14 +242,14 @@ public class MusicaDAO implements Map<Integer, Musica>{
 
 
     //transacoes
-    public Collection<Musica> values() {
+    public Collection<Arquivo> values() {
         try {
             Collection colecao = new HashSet<Musica>();
             Statement stm = Conexao.getConexao().createStatement();
             ResultSet rs = stm.executeQuery("SELECT * FROM Musica");
             while (rs.next()) {
                 colecao.add(new Musica(Integer.valueOf(rs.getString(1)),rs.getString(2),rs.getString(3),
-                                        rs.getString(4),Integer.valueOf(rs.getString(5)),rs.getString(6)));
+                                        rs.getString(4),rs.getString(5),rs.getString(6)));
             }
             return colecao;
         }
@@ -262,7 +257,7 @@ public class MusicaDAO implements Map<Integer, Musica>{
     }
 
 
-    public int proximoIdMusica() {
+    public int proximoId() {
         try {
             int proxId = 0;
             Statement stm = Conexao.getConexao().createStatement();
@@ -280,6 +275,16 @@ public class MusicaDAO implements Map<Integer, Musica>{
         } catch (SQLException e) {
             throw new NullPointerException(e.getMessage());
         }
+    }
+
+
+    public Map<Integer, Musica> getTodos() {
+        Map<Integer, Musica> mapMusicas = new HashMap<>();
+        Collection<Arquivo> colecao = values();
+
+        colecao.forEach(m -> mapMusicas.put(m.chave(), (Musica)m));
+
+        return mapMusicas;
     }
 
 }

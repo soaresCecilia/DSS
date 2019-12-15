@@ -1,4 +1,4 @@
-package com.jetbrains;
+package MediaCenter.LogicaDeNegocio.Usuarios;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,9 +38,9 @@ public class Utilizador {
 
     public List<String> utilizadorToLinha(Utilizador u) {
         List<String> utilizador = new ArrayList<>();
-            utilizador.add(this.email);
-            utilizador.add(this.nome);
-            utilizador.add(this.password);
+            utilizador.add(u.email);
+            utilizador.add(u.nome);
+            utilizador.add(u.password);
 
             return utilizador;
 
