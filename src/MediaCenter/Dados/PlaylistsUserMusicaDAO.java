@@ -1,6 +1,7 @@
 package MediaCenter.Dados;
 
 import MediaCenter.LogicaDeNegocio.Funcionalidades.Arquivo;
+import MediaCenter.LogicaDeNegocio.Funcionalidades.Musica;
 import MediaCenter.LogicaDeNegocio.Funcionalidades.Playlists;
 
 import java.sql.ResultSet;
@@ -41,7 +42,7 @@ public class PlaylistsUserMusicaDAO implements Map<String, Playlists> {
     public boolean isEmpty() {
         try {
             Statement stm = Conexao.getConexao().createStatement();
-            ResultSet rs = stm.executeQuery("SELECT id FROM PlaylistMusica");
+            ResultSet rs = stm.executeQuery("SELECT * FROM PlaylistMusica");
             return !rs.next();
         }
         catch (Exception e) {throw new NullPointerException(e.getMessage());}
@@ -62,21 +63,11 @@ public class PlaylistsUserMusicaDAO implements Map<String, Playlists> {
             return false;
 
         try {
-            List<Object> playlistLinha = ((Playlists) value).playlistToLinha((Playlists) value);
 
             Statement stm = Conexao.getConexao().createStatement();
-            StringBuilder query = new StringBuilder("SELECT * FROM PlaylistMusica WHERE ");
+            String query = ("SELECT * FROM PlaylistMusica WHERE nome = '" + this.colunas.get(0));
+            ResultSet rs = stm.executeQuery(query);
 
-
-            //percorre todas as colunas da tabela, excepto a última
-            for(int i = 0; i < (this.colunas.size()-1) ; i++){
-                query.append(this.colunas.get(i) + " = '" + playlistLinha.get(i) + "' and ");
-            }
-
-            //valor da ultima coluna para pôr;
-            query.append(this.colunas.get(this.colunas.size()-1) + " = '" + playlistLinha.get(this.colunas.size()-1) + "' ; ");
-
-            ResultSet rs = stm.executeQuery(query.toString());
 
             return rs.next();
         }
@@ -88,35 +79,39 @@ public class PlaylistsUserMusicaDAO implements Map<String, Playlists> {
     public Playlists get(Object key) {
 
         try {
-            String nome = "";
-            String email = "";
-            Playlists p = null;
             Arquivo arquivo = null;
             Statement stm = Conexao.getConexao().createStatement();
-            String sql = "SELECT * FROM PlaylistMusica WHERE nome ='" + (String) key + "'";
+            String sql = "SELECT p.nome, p.email, m.id, m.nome, m.autor, m.album," +
+                    " m.categoria, m.caminho FROM PlaylistMusica as p" +
+                    " INNER JOIN Musica as m ON p.idMusica = m.id WHERE p.nome ='" + (String) key + "'";
             ResultSet rs = stm.executeQuery(sql);
+
+
 
 
             List<Arquivo> arquivosPlaylist = new ArrayList<>();
 
+            String nome = rs.getString(1);;
+            String email = rs.getString(2);;
+
 
             while (rs.next()) {
 
-                nome = rs.getString(1);
+                //garantir que só traz musicas da mesma playlist
+                assert((nome.equals(rs.getString(1))));
 
-                email = rs.getString(2);
+                //garantir que só traz musicas do mesmo utilizador
+                assert((email.equals(rs.getString(2))));
 
-                Integer id = (Integer.valueOf(rs.getString(3)));
-
-                arquivo = p.getArquivoDaPlaylist(id);
+                arquivo = new Musica(Integer.valueOf(rs.getString(3)), rs.getString(4),
+                                        rs.getString(5), rs.getString(6),
+                                        rs.getString(7), rs.getString(8));
 
                 arquivosPlaylist.add(arquivo);
 
-
             }
 
-            //adicionar parametros conforme o contrutor
-            p = new Playlists(nome, email, arquivosPlaylist);
+            Playlists p = new Playlists(nome, email, arquivosPlaylist);
 
             return p;
         }
@@ -127,14 +122,13 @@ public class PlaylistsUserMusicaDAO implements Map<String, Playlists> {
         try {
 
             Statement stm = Conexao.getConexao().createStatement();
-            //stm.executeUpdate("DELETE FROM PlaylistVideo WHERE id ='" + key + "','" + );
+            remove(key);
 
             for (int i = 0; i < value.getArquivos().size() - 1; i++) {
-                String query = "INSERT INTO PlaylistVideo(nome, email, idMusica;) " +
+                String query = "INSERT INTO PlaylistMusica(nome, email, idMusica;) " +
                         "VALUES ('" + key + "','" + value.getEmail() + "','" + value.getArquivoDaPlaylist(i).getID() + "')";
                 stm.executeUpdate(query);
             }
-
 
             return new Playlists(value.getNome(), value.getEmail(), value.getArquivos());
         }
@@ -145,7 +139,7 @@ public class PlaylistsUserMusicaDAO implements Map<String, Playlists> {
         try {
             Playlists p = this.get(key);
             Statement stm = Conexao.getConexao().createStatement();
-            String query = "DELETE FROM PlaylistMusica where nome =" + this.colunas.get(0) +  "' ;";
+            String query = "DELETE * FROM PlaylistMusica where nome ='" + this.colunas.get(0) +  "' ;";
             stm.executeUpdate(query);
 
 
@@ -166,7 +160,7 @@ public class PlaylistsUserMusicaDAO implements Map<String, Playlists> {
     public void clear() {
         try {
             Statement stm = Conexao.getConexao().createStatement();
-            stm.executeUpdate("DELETE FROM PlaylistMusica");
+            stm.executeUpdate("DELETE * FROM PlaylistMusica");
         }
         catch (Exception e) {throw new NullPointerException(e.getMessage());}
     }
@@ -174,9 +168,10 @@ public class PlaylistsUserMusicaDAO implements Map<String, Playlists> {
     public Set<String> keySet() {
         try {
             Statement stm = Conexao.getConexao().createStatement();
-            ResultSet rs = stm.executeQuery("SELECT " + this.colunas.get(0) + " FROM PlaylistMusica;");
+            ResultSet rs = stm.executeQuery("SELECT '" + this.colunas.get(0) + "' FROM PlaylistMusica;");
 
             Set<String> setChaves = new HashSet<>();
+
             while (rs.next()) {
                 setChaves.add(rs.getString(1));
             }
@@ -188,12 +183,59 @@ public class PlaylistsUserMusicaDAO implements Map<String, Playlists> {
     }
 
     public Collection<Playlists> values() {
-        return null;
+        throw new NullPointerException("Not implemented!");
     }
 
     public Set<Entry<String, Playlists>> entrySet() {
-        return null;
+        throw new NullPointerException("Not implemented!");
     }
+
+
+    //Devolve uma lista de ids de musica da playlist
+    public Collection<Integer> getPorEmail(String email) {
+        try {
+            Statement stm = Conexao.getConexao().createStatement();
+            String sql = "SELECT'" + this.colunas.get(2) + "' FROM PlaylistMusica WHERE nome ='" + email + "'";
+            ResultSet rs = stm.executeQuery(sql);
+
+            List<Integer> idsMusica = new ArrayList<>();
+
+            while (rs.next()) {
+                idsMusica.add(Integer.valueOf(rs.getString(1)));
+            }
+
+            return idsMusica;
+        }
+        catch (Exception e) {throw new NullPointerException(e.getMessage());}
+    }
+
+
+    public Collection<Arquivo> getArquivosPorNomePlaylist(String nomePlaylist) {
+        try {
+            Statement stm = Conexao.getConexao().createStatement();
+            String sql = "SELECT m.id, m.nome, m.autor, m.album," +
+                    " m.categoria, m.caminho FROM PlaylistMusica as p "+
+                    " INNER JOIN Musica as m ON p.idMusica = m.id WHERE p.nome ='" + nomePlaylist + "'";
+
+            ResultSet rs = stm.executeQuery(sql);
+
+            List<Arquivo> arqMusica = new ArrayList<>();
+            Arquivo arq = null;
+
+            while (rs.next()) {
+                arq = new Musica(Integer.valueOf(rs.getString(1)), rs.getString(2),
+                                    rs.getString(3), rs.getString(4),
+                                    rs.getString(5), rs.getString(6));
+                arqMusica.add(arq);
+
+            }
+            return arqMusica;
+        }
+        catch (Exception e) {throw new NullPointerException(e.getMessage());}
+
+    }
+
+
 
 
 }

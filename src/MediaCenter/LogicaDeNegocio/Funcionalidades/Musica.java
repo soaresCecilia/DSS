@@ -57,6 +57,10 @@ public class Musica implements Arquivo {
         return "Musica";
     }
 
+    public List<String> getDownloads() {
+        return downloads;
+    }
+
     public List<Object>  arquivoToLinha(Arquivo arq) {
         List<Object> musica = new ArrayList<>();
 
@@ -75,6 +79,8 @@ public class Musica implements Arquivo {
     public int chave() {
         return this.idMusica;
     }
+
+
 
 
 

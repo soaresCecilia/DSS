@@ -9,7 +9,6 @@ public class Playlists {
     //garantir que não há duas playlists com nomes iguais
     private String nome;
     private String email;
-    private String tipo; //se é video ou musica
     private List<Arquivo> arquivos;
     private ArquivoDAO arquivosPlaylist;
 
@@ -31,6 +30,9 @@ public class Playlists {
 
         return null;
     }
+
+
+
 
     public List<Object>  playlistToLinha(Playlists p) {
         List<Object> playlist = new ArrayList<>();
@@ -85,11 +87,9 @@ public class Playlists {
         return email;
     }
 
-    public String getTipo() {
-        return tipo;
-    }
 
     public List<Arquivo> getArquivos() {
         return arquivos;
     }
+
 }
