@@ -1,7 +1,6 @@
 package MediaCenter.Dados;
 
-import MediaCenter.LogicaDeNegocio.Funcionalidades.Colecoes;
-import MediaCenter.LogicaDeNegocio.Funcionalidades.ColecoesMusica;
+import MediaCenter.LogicaDeNegocio.Funcionalidades.Colecao;
 import MediaCenter.LogicaDeNegocio.Funcionalidades.ColecoesVideo;
 
 import java.sql.ResultSet;
@@ -9,7 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
 
-public class ColecoesVideoDAO implements ColecoesDAO {
+public class ColecoesVideoDAO implements ColecaoDAO {
     private static ColecoesVideoDAO inst = null;
     private final List<String> colunas = Arrays.asList("id", "email", "acao");
     //tabela : ColecoesVideo
@@ -65,7 +64,7 @@ public class ColecoesVideoDAO implements ColecoesDAO {
 
 
     @Override
-    public Colecoes get(Object key) {
+    public Colecao get(Object key) {
         try {
             ColecoesVideo c = null;
             String acao = "";
@@ -92,7 +91,7 @@ public class ColecoesVideoDAO implements ColecoesDAO {
     }
 
     @Override
-    public Colecoes put(Key key, Colecoes value) {
+    public Colecao put(Key key, Colecao value) {
         try {
             Statement stm = Conexao.getConexao().createStatement();
             remove(key);
@@ -117,7 +116,7 @@ public class ColecoesVideoDAO implements ColecoesDAO {
 
 
     @Override
-    public Colecoes remove(Object key) {
+    public Colecao remove(Object key) {
         if(!(key instanceof Key)) {
             return null;
         }
@@ -135,10 +134,10 @@ public class ColecoesVideoDAO implements ColecoesDAO {
     }
 
     @Override
-    public void putAll(Map<? extends Key, ? extends Colecoes> colecao) {
+    public void putAll(Map<? extends Key, ? extends Colecao> colecao) {
         for(Map.Entry entrada: colecao.entrySet()) {
             Key key = (Key)entrada.getKey();
-            for (Colecoes c : colecao.values()) {
+            for (Colecao c : colecao.values()) {
                 this.put(key, c);
             }
         }
@@ -175,12 +174,12 @@ public class ColecoesVideoDAO implements ColecoesDAO {
     }
 
     @Override
-    public Collection<Colecoes> values() {
+    public Collection<Colecao> values() {
         throw new NullPointerException("Not implemented!");
     }
 
     @Override
-    public Set<Entry<Key, Colecoes>> entrySet() {
+    public Set<Entry<Key, Colecao>> entrySet() {
         throw new NullPointerException("Not implemented!");
     }
 

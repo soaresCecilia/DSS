@@ -1,10 +1,8 @@
 package MediaCenter.LogicaDeNegocio.Funcionalidades;
 
-import MediaCenter.Dados.ArquivoDAO;
-
 import java.util.*;
 
-public class ColecoesMusica implements Colecoes{
+public class ColecoesMusica implements Colecao {
 
     private List<Integer> idsArquivosUpload;
     private List<Integer> idsArquivosDownload;

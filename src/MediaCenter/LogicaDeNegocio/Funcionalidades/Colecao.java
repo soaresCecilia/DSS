@@ -2,7 +2,7 @@ package MediaCenter.LogicaDeNegocio.Funcionalidades;
 
 import java.util.List;
 
-public interface Colecoes {
+public interface Colecao {
 
     public int tamColecaoUploads();
 

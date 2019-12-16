@@ -2,7 +2,7 @@ package MediaCenter.LogicaDeNegocio.Funcionalidades;
 
 import java.util.List;
 
-public class ColecoesVideo implements Colecoes {
+public class ColecoesVideo implements Colecao {
 
     private List<Integer> idsArquivosUpload;
     private List<Integer> idsArquivosDownload;

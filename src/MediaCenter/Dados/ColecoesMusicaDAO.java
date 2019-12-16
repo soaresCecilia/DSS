@@ -1,6 +1,6 @@
 package MediaCenter.Dados;
 
-import MediaCenter.LogicaDeNegocio.Funcionalidades.Colecoes;
+import MediaCenter.LogicaDeNegocio.Funcionalidades.Colecao;
 import MediaCenter.LogicaDeNegocio.Funcionalidades.ColecoesMusica;
 
 
@@ -13,7 +13,7 @@ import java.util.*;
 
 
 
-public class ColecoesMusicaDAO implements ColecoesDAO {
+public class ColecoesMusicaDAO implements ColecaoDAO {
     private static ColecoesMusicaDAO inst = null;
     private final List<String> colunas = Arrays.asList("id", "email", "acao");
     //tabela : ColecoesMusica
@@ -69,14 +69,14 @@ public class ColecoesMusicaDAO implements ColecoesDAO {
 
 
     @Override
-    public ColecoesMusica get(Object key) {
+    public Colecao get(Object key) {
         try {
             ColecoesMusica c = null;
             String acao = "";
             List<Integer> uploads = new ArrayList<>();
             List<Integer> downloads = new ArrayList<>();
             Statement stm = Conexao.getConexao().createStatement();
-            String sql = "SELECT * FROM ColecoesMusica WHERE email ='"+((Key)key).getEmail()+"'";
+            String sql = "SELECT * FROM ColecoesMusica WHERE email ='"+(String)key+"'";
             ResultSet rs = stm.executeQuery(sql);
             while (rs.next()) {
 
@@ -96,7 +96,7 @@ public class ColecoesMusicaDAO implements ColecoesDAO {
     }
 
     @Override
-    public Colecoes put(Key key, Colecoes value) {
+    public Colecao put(Key key, Colecao value) {
         try {
             Statement stm = Conexao.getConexao().createStatement();
             remove(key);
@@ -121,13 +121,13 @@ public class ColecoesMusicaDAO implements ColecoesDAO {
 
 
     @Override
-    public ColecoesMusica remove(Object key) {
+    public Colecao remove(Object key) {
         if(!(key instanceof Key)) {
             return null;
         }
 
         try {
-            ColecoesMusica c = this.get(key);
+            Colecao c = this.get(key);
             Statement stm = Conexao.getConexao().createStatement();
             String query = "DELETE FROM ColecoesMusica where where " + this.colunas.get(1) +  " = '" + ((Key) key).getEmail() + "' ;";
             stm.executeUpdate(query);
@@ -139,10 +139,10 @@ public class ColecoesMusicaDAO implements ColecoesDAO {
     }
 
     @Override
-    public void putAll(Map<? extends Key, ? extends Colecoes> colecao) {
+    public void putAll(Map<? extends Key, ? extends Colecao> colecao) {
         for(Map.Entry entrada: colecao.entrySet()) {
             Key key = (Key)entrada.getKey();
-            for (Colecoes c : colecao.values()) {
+            for (Colecao c : colecao.values()) {
                 this.put(key, c);
             }
         }
@@ -185,12 +185,16 @@ public class ColecoesMusicaDAO implements ColecoesDAO {
 
 
     @Override
-    public Collection<Colecoes> values() {
+    public Collection<Colecao> values() {
         throw new NullPointerException("Not implemented!");
     }
 
     @Override
-    public Set<Entry<Key, Colecoes>> entrySet() {
+    public Set<Entry<Key, Colecao>> entrySet() {
         throw new NullPointerException("Not implemented!");
     }
+
+
+
+
 }
