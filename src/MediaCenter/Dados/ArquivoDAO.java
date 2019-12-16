@@ -12,7 +12,6 @@ public interface ArquivoDAO extends Map<Integer, Arquivo> {
 
     public int size();
 
-
     public boolean isEmpty();
 
     public boolean containsKey(Object key);
@@ -36,4 +35,5 @@ public interface ArquivoDAO extends Map<Integer, Arquivo> {
     public Set<Entry<Integer, Arquivo>> entrySet();
 
     public int proximoId();
+
 }

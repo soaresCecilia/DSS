@@ -9,44 +9,6 @@ import java.sql.Statement;
 import java.util.*;
 
 
-
-
-class Key {
-    private Integer id;
-    private String email;
-
-
-    public Integer getId() {
-        return this.id;
-    }
-
-    public String getEmail() {
-        return this.email;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if(obj != null && obj instanceof Key) {
-            Key k = (Key) obj;
-            return id.equals(k.id) && email.equals(k.email);
-        }
-        return false;
-    }
-
-    @Override
-    public int hashCode() {
-        return (id.toString() + email).hashCode();
-    }
-}
-
 public class ArquivosMudadosDAO implements Map<Key, Arquivo> {
     private static ArquivosMudadosDAO inst = null;
     private final List<String> colunas = Arrays.asList("id","email","categoriaNova"); //as chaves da tabela são idArquivo e email
@@ -102,7 +64,7 @@ public class ArquivosMudadosDAO implements Map<Key, Arquivo> {
         catch (Exception e) {throw new NullPointerException(e.getMessage());}
     }
 
-
+    @Override
     public boolean containsValue(Object value) {
         if (!(value instanceof Arquivo))
             return false;
@@ -174,14 +136,15 @@ public class ArquivosMudadosDAO implements Map<Key, Arquivo> {
         }
     }
 
+
     @Override
     public Arquivo put(Key key, Arquivo value) {
 
         try {
         Statement stm = Conexao.getConexao().createStatement();
-        stm.executeUpdate("DELETE FROM ArquivosMudados WHERE id ='"+ key.getId() + "and email ='" + key.getEmail() + "'");
+        stm.executeUpdate("DELETE FROM ArquivosMudados WHERE id ='" + ((Key)key).getId() + "and email ='" +((Key)key).getEmail() + "'");
         String query = "INSERT INTO ArquivosMudados(id, email, categoriaNova;) " +
-                    "VALUES ('" + value.getID() + "','" + key.getEmail() + "','" + value.getCategoria() + "')";
+                    "VALUES ('" + value.getID() + "','" + ((Key)key).getEmail() + "','" + value.getCategoria() + "')";
         stm.executeUpdate(query);
 
         return value;
@@ -226,7 +189,7 @@ public class ArquivosMudadosDAO implements Map<Key, Arquivo> {
     public void clear() {
         try {
             Statement stm = Conexao.getConexao().createStatement();
-            stm.executeUpdate("DELETE FROM ArquivosMudados");
+            stm.executeUpdate("DELETE * FROM ArquivosMudados");
         }
         catch (Exception e) {throw new NullPointerException(e.getMessage());}
     }

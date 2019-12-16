@@ -6,8 +6,8 @@ import java.util.Collection;
 
 public class Media {
 
-    private CategoriaMusicaDAO categoriasMusica;
-    private CategoriaVideoDAO categoriasVideo;
+    private ColecoesMusicaDAO categoriasMusica;
+    private ColecoesVideoDAO categoriasVideo;
     private PlaylistsUserMusicaDAO playlistsMusica;
     private PlaylistsUserVideoDAO playlistsVideo;
     private ArquivoDAO arquivos;

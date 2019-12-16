@@ -11,6 +11,8 @@ public class Musica implements Arquivo {
     private String album;
     private String categoria;
     private String caminho;
+    private String upload;
+    private List<String> downloads;
 
 
     public Musica(int idMusica, String nome, String autor, String album, String categoria, String caminho) {
